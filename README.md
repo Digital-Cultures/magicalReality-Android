@@ -1,2 +1,2 @@
 # CHILDREN`S MAGICAL REALISM FOR NEW SPATIAL INTERACTIONS: AR AND ARCHIVES
-Children's Magical Realism
+Our project, with our partners Seven Stories, uses the work of a prominent author of children and young adults’ books, David Almond to suggest new imaginative spatial interactions for AR. Almond has been describe as a magical realist author and much of his work is about confusing or ambiguous cross overs between worlds, real and imaginary, past and present, everyday or mythical. During our project we will work with specialists from our project partner, Seven Stories, the National Centre for Children’s Books as target audiences and AR specialists to co-design new kinds of spatial interaction for AR and VR applications.
