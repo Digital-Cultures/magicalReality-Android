@@ -7,20 +7,20 @@ public class poi : MonoBehaviour {
 	public GameObject uiContainer;
 	public GameObject marker;
 	public Sprite visitedIcon;
-	public float compassWidth; 
+	public float compassWidth = 975; 
 	private GameObject markerGO;
 	private Vector3 startPosition;
 	private Camera cam;
 	public float transparentDistance;
-	public float solidDistance;
+	public float solidDistance = 5;
 	private float playerDistance=100;
 	private bool visited=false;
 
 	// Use this for initialization
 	void Start () {
 		cam=Camera.main;
-		markerGO=Instantiate(marker);
-		markerGO.transform.SetParent(uiContainer.transform);
+		markerGO = Instantiate(marker) as GameObject;
+		//markerGO.transform.SetParent(uiContainer.transform);
 		startPosition = new Vector3(0,0,0);
 		markerGO.transform.localPosition=startPosition;
 		markerGO.SetActive(false);

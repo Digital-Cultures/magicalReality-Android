@@ -28,10 +28,17 @@ ExportedObj/
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
+*.mdb.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 
+# Crashlytics generated file
+crashlytics-build.properties
+
 # Builds
 *.apk
 *.unitypackage
+
+# Gradle cache directory
+.gradle

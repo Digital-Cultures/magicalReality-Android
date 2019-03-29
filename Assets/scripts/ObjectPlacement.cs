@@ -29,8 +29,15 @@ public class ObjectPlacement : MonoBehaviour {
 		lonLat=new dLocation(longitude,latitude);
 	}
 	
-	// Update is called once per frame
-	void Update () {
+    public void SetLonLat(double longitudeVal, double latitudeVal)
+    {
+        longitude = longitudeVal;
+        latitude = latitudeVal;
+
+        Debug.Log("Called");
+    }
+    // Update is called once per frame
+    void Update () {
 
 		if(Global.originSet){ //&& Global.bearingSet
 			//Init
@@ -193,6 +200,4 @@ public class ObjectPlacement : MonoBehaviour {
 	    	rend.material.color=currentCol;
 		}
 	}
-
-
 }
