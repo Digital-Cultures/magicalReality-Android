@@ -7,8 +7,8 @@ public class ObjectPlacement : MonoBehaviour {
 	//Game object properties
 	public double latitude;
 	public double longitude;
-	public float transparentDistance;
-	public float solidDistance;
+    public float transparentDistance = 50;
+	public float solidDistance = 3;
 	public bool faceCamera=true;
 	public bool useGlobalDistance=true;
 	private Vector3 worldPos;
@@ -27,19 +27,21 @@ public class ObjectPlacement : MonoBehaviour {
 		setVisible(false);
 		mainCam=Camera.main;
 		lonLat=new dLocation(longitude,latitude);
-	}
+        Debug.Log("------------------Start Object Placment ");
+    }
 	
     public void SetLonLat(double longitudeVal, double latitudeVal)
     {
         longitude = longitudeVal;
         latitude = latitudeVal;
 
-        Debug.Log("Called");
     }
     // Update is called once per frame
     void Update () {
 
-		if(Global.originSet){ //&& Global.bearingSet
+        Debug.Log("--------ObjectPlacement----------: " + Global.originSet  +"  "+ transform.name + "  " + playerDistance + "  " + transparentDistance + "  " + solidDistance + "  " + alpha);
+
+        if (Global.originSet){ //&& Global.bearingSet
 			//Init
 			if(!positionSet){
 				worldPos=Conversions.lonLatToXZ(Global.dOrigin,lonLat);
@@ -87,7 +89,8 @@ public class ObjectPlacement : MonoBehaviour {
 					transform.position=new Vector3(transform.position.x,Global.planeY,transform.position.z);
 					minDistance=playerDistance;
 				}
-			}
+
+            }
 
 		}
 
@@ -139,9 +142,12 @@ public class ObjectPlacement : MonoBehaviour {
 	void setOpacity(){
 		Renderer rend;
 		float distance=playerDistance;
+
+        //odd maths?
 		double gradient=-1.0f/(transparentDistance-solidDistance);
 		double displace=-(gradient*transparentDistance);
 		alpha=(float)gradient*distance+(float)displace;
+
 		Color currentCol;
 		if(GetComponent<ParticleSystem>() != null)
  		{
@@ -172,10 +178,10 @@ public class ObjectPlacement : MonoBehaviour {
 					    	}
 				    	}
 				    	else{
-				    		currentCol.a=0.0f;
-				    		visible=false;
-				    	}
-				    	rend.material.color=currentCol;
+                            currentCol.a=0.0f;
+                            visible=false;
+                        }
+                        rend.material.color=currentCol;
 				    }
         		}
 			}
@@ -184,7 +190,7 @@ public class ObjectPlacement : MonoBehaviour {
 			currentCol=rend.material.color;
 	    	if(alpha<0){
 	    		currentCol.a=0.0f;
-	    		visible=false;
+	    		visible= false;
 	    	}
 	    	else if(alpha>1){
 		    	currentCol.a=1.0f;

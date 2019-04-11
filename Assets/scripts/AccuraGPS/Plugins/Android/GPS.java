@@ -37,7 +37,7 @@ public class GPS {
 
     public void start(){
         // construct a new instance of SimpleLocation
-        location = new SimpleLocation(context, true, false, 500, true);
+        location = new SimpleLocation(context, true, false, 2000, true);
 
         // if we can't access the location yet
         if (!location.hasLocationEnabled()) {

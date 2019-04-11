@@ -7,7 +7,7 @@ public class LoadJSON : MonoBehaviour
 {
     string JsonDataString;
     public string OriginalJsonSite;
-    public Text CountryName;
+    public Text UserNames;
 
     IEnumerator Start()
     {
@@ -20,17 +20,13 @@ public class LoadJSON : MonoBehaviour
         }
 
         JSONNode jsonNode = SimpleJSON.JSON.Parse(JsonDataString);
+        Debug.Log("TRY TO LOAD LOCATION!");
 
         foreach (var kpv in jsonNode)
         {
-            // CountryName.text = jsonNode["country"].ToString().ToUpper();
+            UserNames.text += kpv.Key.ToString().ToUpper();
             // Debug.Log(jsonNode["country"]);
             // Debug.Log(key + " = " + key["latitude"].ToString());
-            Debug.Log(kpv.Value["_id"]);
-            Debug.Log(kpv.Value["objectID"]);
-            Debug.Log(kpv.Value["rotation"]);
-            Debug.Log(kpv.Value["latitude"]);
-            Debug.Log(kpv.Value["longitude"]);
 
         }
 

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class placementTutorial : MonoBehaviour {
+public class PlacementTutorial : MonoBehaviour
+{
 
 	public Sprite[] pages;
 	public Sprite closeIcon;
@@ -20,10 +21,10 @@ public class placementTutorial : MonoBehaviour {
 			Global.placeTutorialComplete=true;
 			Destroy(panel);
 			return;
-		}
+        }
 
-		pageImage = textContainer.GetComponent<Image>();
-		pageImage.sprite=pages[currentPage];
+        pageImage = textContainer.GetComponent<Image>();
+        pageImage.sprite = pages[currentPage];
 		btn=mButton.GetComponent<Button>();
 		panel.SetActive(false);
 

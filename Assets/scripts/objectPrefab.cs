@@ -23,6 +23,8 @@ public class objectPrefab : MonoBehaviour
         WWW readingsite = new WWW(OriginalJsonSite);
         yield return readingsite;
 
+        Debug.Log("TRY TO LOAD LOCATION!");
+
         if (string.IsNullOrEmpty(readingsite.error))
         {
             JsonDataString = readingsite.text;
@@ -45,23 +47,50 @@ public class objectPrefab : MonoBehaviour
             // 1 = cluny
             if (kpv.Value["objectID"].ToString() == "1") {
                 Clone = Instantiate(cluny, transform.position, Quaternion.identity) as GameObject;
-            } else if (kpv.Value["objectID"].ToString() == "2") {
+            } else
+
+            // 2 = cagedBird
+            if (kpv.Value["objectID"].ToString() == "2") {
                 Clone = Instantiate(cagedBird, transform.position, Quaternion.identity) as GameObject;
-            } else if (kpv.Value["objectID"].ToString() == "3") {
+            }
+            else
+
+            // 3 = growUp
+            if (kpv.Value["objectID"].ToString() == "3") {
                 Clone = Instantiate(growUp, transform.position, Quaternion.identity) as GameObject;
-            } else if (kpv.Value["objectID"].ToString() == "4") {
+            }
+            else
+
+            // 4 = mdhm
+            if (kpv.Value["objectID"].ToString() == "4") {
                 Clone = Instantiate(mdhm, transform.position, Quaternion.identity) as GameObject;
-            } else if (kpv.Value["objectID"].ToString() == "5") {
+            }
+            else
+
+            // 5 = hyestd
+            if (kpv.Value["objectID"].ToString() == "5") {
                 Clone = Instantiate(hyestd, transform.position, Quaternion.identity) as GameObject;
-            } else if (kpv.Value["objectID"].ToString() == "6") {
+            }
+            else
+
+            // 6 = clayCellFracture
+            if (kpv.Value["objectID"].ToString() == "6") {
                 Clone = Instantiate(clayCellFracture, transform.position, Quaternion.identity) as GameObject;
             }
 
 
             if (Clone != null) {
+                Clone.transform.parent = GameObject.FindWithTag("worldRoot").transform;
+
                 var scriptReference = Clone.GetComponent<ObjectPlacement>();
                 if (scriptReference != null) {
                     scriptReference.SetLonLat(kpv.Value["longitude"], kpv.Value["latitude"]);
+                }
+
+                var scriptReferencePOI = Clone.GetComponent<poi>();
+                if (scriptReferencePOI != null)
+                {
+                    scriptReferencePOI.uiContainer = GameObject.FindWithTag("mask");
                 }
             }
         

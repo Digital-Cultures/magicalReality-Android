@@ -59,10 +59,10 @@ namespace AccuraGPS
             }
         }
         private float coordsDif2=10000.0f; //Used to assess gps accuracy
-        private double minLon=-1.708869;
-        private double minLat=54.922786;
-        private double maxLon=-1.510511;
-        private double maxLat=55.049433;
+        private double minLon= -10.00;
+        private double minLat= -80.00;
+        private double maxLon= 100.00;
+        private double maxLat= 80.00;
         private double latitude;
         private double longitude;
         public bool originSet=false;
@@ -102,7 +102,8 @@ namespace AccuraGPS
     	}
 
     	IEnumerator Start()
-        {   
+        {
+            Debug.Log("------------------Start :  ");
             waitingGPS.SetActive(false);
             worldRoot=GameObject.Find("worldRoot");
             rSolver=worldRoot.GetComponent<rotationSolver>();
@@ -123,28 +124,34 @@ namespace AccuraGPS
     	//OWN FUNCTIONS
     	void GetCurrentPos() // Get position and add to lists
         {
-            if(!Global.originSet && Global.tutorialComplete){
+            if (!Global.originSet && Global.tutorialComplete){
                 waitingGPS.SetActive(true);
             }
-            //Vector2 currentPoint;
+
+             //Vector2 currentPoint;
             dLocation dCurrentPoint;
             //Are you in Newcastle?
 
-            if(minLon<GPS.Longitude &&
+           
+            if (minLon<GPS.Longitude &&
                 GPS.Longitude<maxLon && 
                 minLat<GPS.Latitude &&
                 GPS.Latitude<maxLat
                 ){
                 //currentPoint=new Vector2(Input.location.lastData.longitude,Input.location.lastData.latitude);
-                dCurrentPoint=new dLocation(GPS.Longitude,GPS.Latitude);
+                Debug.Log("------------------Longitude: " + GPS.Longitude + "  Latitude: " + GPS.Latitude);
+                dCurrentPoint = new dLocation(GPS.Longitude,GPS.Latitude);
             }
             else{
                 //TODO add out of bounds behaviour
-                dCurrentPoint=new dLocation(GPS.Longitude,GPS.Latitude);
+    
+                dCurrentPoint = new dLocation(GPS.Longitude,GPS.Latitude);
                 //return;
             }
-            
-            if(dLocations.Count < 10)
+
+
+
+            if (dLocations.Count < 10)
             {
                 dLocations.Add(dCurrentPoint);
             }
@@ -195,11 +202,15 @@ namespace AccuraGPS
                     Global.originSet=true;
                     //Debug.Log("origin= "+dOrigin.lon+","+dOrigin.lat);
                 }
-                
+
+
+                Debug.Log("------------------updateLatLng :  originSet: " + originSet);
                 //Update display
-                if(originSet){
+                if (originSet){
                     waitingGPS.SetActive(false);
-                    xyz=Conversions.lonLatToXZ(dOrigin,dCurrentLoc);
+                    Debug.Log("------------------");
+
+                   xyz =Conversions.lonLatToXZ(dOrigin,dCurrentLoc);
                     if(dGpsLocs.Count<150){
                         dGpsLocs.Add(dCurrentLoc);
                         Global.dPlayerLatLon=dCurrentLoc;
@@ -274,7 +285,7 @@ namespace AccuraGPS
 
         void setRegion(dLocation location){
             double distance=Conversions.coordsDistance(location,Global.region1);
-            if(distance<1500){
+            if(distance<150000){
                 Global.ActiveSet=0;
             }
             else{

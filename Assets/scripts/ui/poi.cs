@@ -18,7 +18,8 @@ public class poi : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cam=Camera.main;
+        Debug.Log("------------------Start POI ");
+        cam =Camera.main;
 		markerGO = Instantiate(marker) as GameObject;
 		//markerGO.transform.SetParent(uiContainer.transform);
 		startPosition = new Vector3(0,0,0);
@@ -33,9 +34,13 @@ public class poi : MonoBehaviour {
 				markerGO.SetActive(true);
 			}
 			markerGO.transform.localPosition = markerPosition();
-			if (Time.frameCount % Global.opacityInterval == 1){
+
+
+            if (Time.frameCount % Global.opacityInterval == 1){
 				playerDistance=distanceFromPlayer();
-				if(playerDistance<solidDistance/2 ){
+
+
+                if (playerDistance<solidDistance/2 ){
 					if(!visited){
 						visited=true;
 						Image img=markerGO.GetComponent<Image>();
@@ -43,10 +48,13 @@ public class poi : MonoBehaviour {
 					}
 				}
 				setOpacity();
-			}
+                //Debug.Log("------------------DISTANCE 1: " + playerDistance +"  "+ transform.name);
+            }
 
 			//Debug.Log("pos  "+markerGO.transform.localPosition);
 		}else if(CompareTag("headingTrig")){
+            // it is a cube
+
 			if(!markerGO.activeSelf){
 				markerGO.SetActive(true);
 			}
@@ -54,11 +62,14 @@ public class poi : MonoBehaviour {
 			if (Time.frameCount % Global.opacityInterval == 1){
 				playerDistance=distanceFromPlayer();
 				setOpacity();
-			}
+               // Debug.Log("------------------DISTANCE 2: " + playerDistance + "  " + transform.name);
+            }
 		}else{
 			playerDistance=distanceFromPlayer();
-		}
-	}
+            //Debug.Log("------------------DISTANCE 3: " + playerDistance + "  " + transform.name);
+        }
+
+    }
 
 	Vector3 markerPosition(){
 		Vector3 heading=transform.position-cam.transform.position;
@@ -74,6 +85,7 @@ public class poi : MonoBehaviour {
         }
         //float angle=Vector3.Angle(normalizedHeading,Camera.main.transform.forward);
         Vector3 outvector=new Vector3(-2*Mathf.Sign(dir)*angle,7.0f,0);
+ //       Debug.Log("------------------markerPosition : " + outvector + "  " + transform.name);
         return outvector;
 	}
 
@@ -92,19 +104,19 @@ public class poi : MonoBehaviour {
 	}
 
 	void setOpacity(){
-			Image markerImg=markerGO.GetComponent<Image>();
-			double gradient=-1.0f/(transparentDistance-solidDistance);
-			double displace=-(gradient*transparentDistance);
-			float alpha=(float)gradient*playerDistance+(float)displace;
-	    	if(alpha<0){
-	    		alpha=0.0f;
-	    	}
-	    	else if(alpha>1){
-		    	alpha=1.0f;
-	    	}
-			Color col =markerImg.color;
-			col.a=alpha;
-			markerImg.color=col;
+		Image markerImg=markerGO.GetComponent<Image>();
+		double gradient=-1.0f/(transparentDistance-solidDistance);
+		double displace=-(gradient*transparentDistance);
+		float alpha=(float)gradient*playerDistance+(float)displace;
+       // Debug.Log("------------------alpha: " + alpha);
+        if (alpha<0){
+    		alpha=1.0f;
+    	}else if(alpha>1){
+	    	alpha=1.0f;
+    	}
+		Color col =markerImg.color;
+		col.a=alpha;
+		markerImg.color=col;
 	}
 
 	public void destroyMarker(){

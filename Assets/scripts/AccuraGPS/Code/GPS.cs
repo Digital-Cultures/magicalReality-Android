@@ -85,7 +85,7 @@ namespace AccuraGPS
             }
             gpsClass.Call("start");
 #else
-			Debug.LogWarning(NOT_SUPPORTED_WARNING);
+            Debug.LogWarning(NOT_SUPPORTED_WARNING);
 #endif
         }
 

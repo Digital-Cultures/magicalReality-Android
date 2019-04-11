@@ -34,7 +34,7 @@ public class rotationSolver : MonoBehaviour {
 	SimplexConstant[] constants=new SimplexConstant[] {new SimplexConstant(180,40)};
 
 	public Sprite archiveItem;
-	public string itemDescription;
+	public string itemDescription="";
 	// Use this for initialization
 	void Start () {
 		instruction.SetActive(false);

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - headingTrig
+  - worldRoot
+  - mask
   layers:
   - Default
   - TransparentFX
