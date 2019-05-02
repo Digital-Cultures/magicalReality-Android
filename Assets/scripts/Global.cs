@@ -35,4 +35,8 @@ public static class Global{
     public static Dictionary<string,float> playerDistance=new Dictionary<string,float>();
     //Interval calculation controls
     public static uint opacityInterval=5;
+
+    public static string chosenRoute = "";
+    public static string userid = "";
+    public static string walkid = "";
 }

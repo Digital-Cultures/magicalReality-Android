@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: nclCultureLab
-  productName: Magical Reality
+  productName: MagicalReality
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -238,8 +238,9 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /Volumes/LaCie/Work/Digital Cultures/Magical Realisum/diego/androidKeyStore/magicalRealityKS.keystore
-  AndroidKeyaliasName: magical reality
+  AndroidKeystoreName: /Volumes/LaCie/Dropbox (Yossarian)/Digital Cultures - Magical
+    Realism/androidKeyStore/magicalRealityKS.keystore
+  AndroidKeyaliasName: 
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 0
@@ -746,7 +747,7 @@ PlayerSettings:
   apiCompatibilityLevel: 2
   cloudProjectId: bc05324b-14c6-452a-8710-e6dbbd09e5ad
   framebufferDepthMemorylessMode: 0
-  projectName: Magical Reality
+  projectName: MagicalReality
   organizationId: danf-s
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
