@@ -136,7 +136,7 @@ public class objectPrefab : MonoBehaviour
                                 var scriptReference = Clone.GetComponent<ObjectPlacement>();
                                 if (scriptReference != null)
                                 {
-                                    scriptReference.SetLonLat(path.Value["lon"], path.Value["lat"]);
+                                    scriptReference.SetLonLat(path.Value["lat"], path.Value["lon"]);
                                 }
 
                                 var scriptReferencePOI = Clone.GetComponent<poi>();
