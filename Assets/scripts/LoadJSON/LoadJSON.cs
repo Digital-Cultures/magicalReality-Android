@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using SimpleJSON;
 
@@ -86,17 +87,19 @@ public class LoadJSON : MonoBehaviour
 
         //TODO: if walkid==null show dropdown
 
-        debugText.text = debugText.text + Environment.NewLine + Global.userid + " " + Global.walkid;
-
         //Debug.Log(OriginalJsonSite);
 
 
-        Debug.Log("TRY TO LOAD FROM LINK!");
+        Debug.Log("TRY TO LOAD FROM LINK IN "+ SceneManager.GetActiveScene().name);
+
+        if (SceneManager.GetActiveScene().name == "main")
+        {
+            SceneManager.LoadScene("mainMenu");
+        }
 
         coroutine = GetRequest(OriginalJsonSite);
         //coroutine = GetRequest(OriginalJsonSite + userid + ".json");
         StartCoroutine(coroutine);
-
     }
 
     IEnumerator GetRequest(string uri)

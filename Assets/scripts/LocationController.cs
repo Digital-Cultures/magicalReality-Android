@@ -103,7 +103,7 @@ namespace AccuraGPS
 
     	IEnumerator Start()
         {
-            Debug.Log("------------------Start :  ");
+          //  Debug.Log("------------------Start :  ");
             waitingGPS.SetActive(false);
             worldRoot=GameObject.Find("worldRoot");
             rSolver=worldRoot.GetComponent<rotationSolver>();
@@ -139,7 +139,7 @@ namespace AccuraGPS
                 GPS.Latitude<maxLat
                 ){
                 //currentPoint=new Vector2(Input.location.lastData.longitude,Input.location.lastData.latitude);
-                Debug.Log("------------------Longitude: " + GPS.Longitude + "  Latitude: " + GPS.Latitude);
+             //   Debug.Log("------------------Longitude: " + GPS.Longitude + "  Latitude: " + GPS.Latitude);
                 dCurrentPoint = new dLocation(GPS.Longitude,GPS.Latitude);
             }
             else{
@@ -204,12 +204,11 @@ namespace AccuraGPS
                 }
 
 
-                Debug.Log("------------------updateLatLng :  originSet: " + originSet);
+           //     Debug.Log("------------------updateLatLng :  originSet: " + originSet);
                 //Update display
                 if (originSet){
                     waitingGPS.SetActive(false);
-                    Debug.Log("------------------");
-
+        
                    xyz =Conversions.lonLatToXZ(dOrigin,dCurrentLoc);
                     if(dGpsLocs.Count<150){
                         dGpsLocs.Add(dCurrentLoc);

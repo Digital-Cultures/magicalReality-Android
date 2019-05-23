@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using GoogleARCore;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
+
+using ImaginationOverflow.UniversalDeepLinking;
+using UnityEngine.Networking;
+
 
 public class ObjectPlacement : MonoBehaviour {
 	//Game object properties
 	public double latitude;
 	public double longitude;
-    public float transparentDistance = 50;
-	public float solidDistance = 3;
+    public int id;
+    public float transparentDistance = 500;
+	public float solidDistance = 10;
 	public bool faceCamera=true;
 	public bool useGlobalDistance=true;
 	private Vector3 worldPos;
@@ -21,12 +28,17 @@ public class ObjectPlacement : MonoBehaviour {
 	// private bool recalcualtePos=false;
 	// private float recalculateDistance;
 	bool visible=false;
-	
-	// Use this for initialization
-	void Start () {
+
+    public Text debugText;
+
+    // Use this for initialization
+    void Start () {
 		setVisible(false);
 		mainCam=Camera.main;
 		lonLat=new dLocation(longitude,latitude);
+
+        //
+        DeepLinkManager.Instance.LinkActivated += Instance_LinkActivated;
         Debug.Log("------------------Start Object Placment ");
     }
 	
@@ -34,12 +46,40 @@ public class ObjectPlacement : MonoBehaviour {
     {
         longitude = longitudeVal;
         latitude = latitudeVal;
+    }
+
+    public void SetID(int ID)
+    {
+        id = ID;
+    }
+
+
+    private void Instance_LinkActivated(LinkActivation linkActivation)
+    {
+        //
+        //  my activation code
+        //
+        var uri = linkActivation.Uri;
+        var querystring = linkActivation.RawQueryString;
+        Global.userid = linkActivation.QueryString["user"];
+        Global.walkid = linkActivation.QueryString["walkid"];
+
+
+        Debug.Log("TRY TO LOAD FROM LINK ON MAIN PAGE!");
+
+      //  coroutine = GetRequest(OriginalJsonSite);
+        //coroutine = GetRequest(OriginalJsonSite + userid + ".json");
+       // StartCoroutine(coroutine);
 
     }
+
     // Update is called once per frame
     void Update () {
 
-        Debug.Log("--------ObjectPlacement----------: " + Global.originSet  +"  "+ transform.name + "  " + playerDistance + "  " + transparentDistance + "  " + solidDistance + "  " + alpha);
+        //Debug.Log("--------ObjectPlacement----------: " + Global.originSet  +"  "+ transform.name + "  " + playerDistance + "  " + transparentDistance + "  " + solidDistance + "  " + alpha);
+
+        Global.objectDistance[id] = playerDistance;
+        Global.objectAlpha[id] = alpha;
 
         if (Global.originSet){ //&& Global.bearingSet
 			//Init
@@ -146,7 +186,7 @@ public class ObjectPlacement : MonoBehaviour {
         //odd maths?
 		double gradient=-1.0f/(transparentDistance-solidDistance);
 		double displace=-(gradient*transparentDistance);
-		alpha=(float)gradient*distance+(float)displace;
+		alpha=(float)gradient*distance+(float)displace+4;
 
 		Color currentCol;
 		if(GetComponent<ParticleSystem>() != null)

@@ -4,6 +4,7 @@ using UnityEngine;
 using SimpleJSON;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public class objectPrefab : MonoBehaviour
 {
@@ -21,12 +22,13 @@ public class objectPrefab : MonoBehaviour
 
 
     public Text debugText;
+    DateTime now;
+
     GameObject Clone;
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
-
         debugText.text = Global.chosenRoute;
 
         WWW readingsite = new WWW(OriginalJsonSite);
@@ -59,6 +61,7 @@ public class objectPrefab : MonoBehaviour
 
                     if (routesJSON.Value["routeName"].ToString().ToUpper() == Global.chosenRoute.ToString())
                     {
+                        var i = 0;
                         foreach (var path in routesJSON.Value["path"])
                         {
                             // CountryName.text = jsonNode["country"].ToString().ToUpper();
@@ -131,22 +134,35 @@ public class objectPrefab : MonoBehaviour
 
                             if (Clone != null)
                             {
+                                //set position
                                 Clone.transform.parent = GameObject.FindWithTag("worldRoot").transform;
 
                                 var scriptReference = Clone.GetComponent<ObjectPlacement>();
                                 if (scriptReference != null)
                                 {
-                                    scriptReference.SetLonLat(path.Value["lat"], path.Value["lon"]);
+                                    scriptReference.SetLonLat(path.Value["lon"], path.Value["lat"]);
+
+                                    //for debug
+                                    Global.objectNames.Add(model);
+                                    Global.objectDistance.Add(0);
+                                    Global.objectAlpha.Add(0);
+                                    scriptReference.SetID(i);
+                                    i++;
+
                                 }
 
+                                //set poi mask
                                 var scriptReferencePOI = Clone.GetComponent<poi>();
                                 if (scriptReferencePOI != null)
                                 {
-                                    scriptReferencePOI.uiContainer = GameObject.FindWithTag("mask");
+                                    scriptReferencePOI.SetUiContainert(GameObject.FindWithTag("mask"));
                                 }
+
+
                             }
 
                             debugText.text = debugText.text + Environment.NewLine + path.Value["model"] +"\t"+ path.Value["action"];
+
                         }
                     }
                 }
@@ -157,6 +173,14 @@ public class objectPrefab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //debug
+        now = DateTime.Now;
+        debugText.text = now.Second.ToString();
+        for (var i = 0; i < Global.objectDistance.Count; i++)
+        {
+            debugText.text = debugText.text + Environment.NewLine + Global.objectNames.ElementAt(i)+ "\t" + Global.objectDistance.ElementAt(i) + "\t" + Global.objectAlpha.ElementAt(i);
+        }
+        debugText.text = debugText.text + Environment.NewLine + Global.debug;
 
     }
 }

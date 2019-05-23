@@ -21,19 +21,25 @@ public class poi : MonoBehaviour {
         Debug.Log("------------------Start POI ");
         cam =Camera.main;
 		markerGO = Instantiate(marker) as GameObject;
-		//markerGO.transform.SetParent(uiContainer.transform);
+		markerGO.transform.SetParent(uiContainer.transform, false);
 		startPosition = new Vector3(0,0,0);
 		markerGO.transform.localPosition=startPosition;
 		markerGO.SetActive(false);
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void SetUiContainert(GameObject uiContainerMask)
+    {
+        uiContainer = uiContainerMask;
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 		if(Global.bearingSet){
 			if(!markerGO.activeSelf){
 				markerGO.SetActive(true);
 			}
-			markerGO.transform.localPosition = markerPosition();
+			markerGO.transform.localPosition = MarkerPosition();
 
 
             if (Time.frameCount % Global.opacityInterval == 1){
@@ -58,7 +64,7 @@ public class poi : MonoBehaviour {
 			if(!markerGO.activeSelf){
 				markerGO.SetActive(true);
 			}
-			markerGO.transform.localPosition = markerPosition();
+			markerGO.transform.localPosition = MarkerPosition();
 			if (Time.frameCount % Global.opacityInterval == 1){
 				playerDistance=distanceFromPlayer();
 				setOpacity();
@@ -71,7 +77,7 @@ public class poi : MonoBehaviour {
 
     }
 
-	Vector3 markerPosition(){
+	Vector3 MarkerPosition(){
 		Vector3 heading=transform.position-cam.transform.position;
 		Vector3 normalizedHeading=heading/heading.magnitude;
 		Vector3 perp = Vector3.Cross(normalizedHeading, cam.transform.forward);

@@ -240,7 +240,7 @@ PlayerSettings:
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: /Volumes/LaCie/Dropbox (Yossarian)/Digital Cultures - Magical
     Realism/androidKeyStore/magicalRealityKS.keystore
-  AndroidKeyaliasName: magical reality
+  AndroidKeyaliasName: 
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 0

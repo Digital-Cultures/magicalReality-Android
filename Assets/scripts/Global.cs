@@ -39,4 +39,8 @@ public static class Global{
     public static string chosenRoute = "";
     public static string userid = "";
     public static string walkid = "";
+    public static List<string> objectNames = new List<string>();
+    public static List<float> objectDistance = new List<float>();
+    public static List<float> objectAlpha = new List<float>();
+    public static string debug = "";
 }
