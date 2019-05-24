@@ -25,7 +25,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Contrast: 1.125
-    - _Desaturation: 0.95822126
+    - _Desaturation: 0.95072114
     - _Sensitivity: 0.349
     m_Colors:
     - _NVColor: {r: 1, g: 1, b: 1, a: 1}

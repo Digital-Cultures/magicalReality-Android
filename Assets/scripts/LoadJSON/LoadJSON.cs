@@ -15,7 +15,7 @@ public class LoadJSON : MonoBehaviour
 {
     string JsonDataString;
     //private string OriginalJsonSite = "https://digitalcultures.ncl.ac.uk/projects/magicalreality/";
-    private string OriginalJsonSite = "https://digitalcultures.ncl.ac.uk/projects/magicalreality/site/php/get_all_routes.php";
+    private string OriginalJsonSite = "https://magicalreality.ncl.ac.uk/php/get_all_routes.php";
 
     private JSONNode userJson;
     private IEnumerator coroutine;
