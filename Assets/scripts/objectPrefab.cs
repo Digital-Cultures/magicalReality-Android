@@ -19,6 +19,8 @@ public class objectPrefab : MonoBehaviour
     public GameObject clayCellFracture;
     public GameObject worldMusic;
     public GameObject BBeautiful;
+    public GameObject raft;
+    public GameObject dynamicText;
 
 
     public Text debugText;
@@ -87,82 +89,117 @@ public class objectPrefab : MonoBehaviour
                             // 2 = cagedBird
                             if (model == "bird.png")
                             {
-                                Clone = Instantiate(cagedBird, transform.position, Quaternion.identity) as GameObject;
-                            }
-                            else
-
-                            // 3 = growUp
-                            if (model == "growup.png")
-                            {
-                                Clone = Instantiate(growUp, transform.position, Quaternion.identity) as GameObject;
-                            }
-                            else
-
-                            // 4 = mdhm
-                            if (model == "murder.png")
-                            {
-                                Clone = Instantiate(mdhm, transform.position, Quaternion.identity) as GameObject;
-                            }
-                            else
-
-                            // 5 = hyestd
-                            if (model == "dead.png")
-                            {
-                                Clone = Instantiate(hyestd, transform.position, Quaternion.identity) as GameObject;
-                            }
-                            else
-
-                            // 6 = clayCellFracture
-                            if (model == "clay.png")
-                            {
-                                Clone = Instantiate(clayCellFracture, transform.position, Quaternion.identity) as GameObject;
-                            }
-
-                            // 7 = worldMusic
-                            if (model == "world.png")
-                            {
-                                Clone = Instantiate(worldMusic, transform.position, Quaternion.identity) as GameObject;
-                            }
-                            else
-
-                            // 8 = clayCellFracture
-                            if (model == "beautiful.png")
-                            {
-                                Clone = Instantiate(BBeautiful, transform.position, Quaternion.identity) as GameObject;
-                            }
-
-
-                            if (Clone != null)
-                            {
-                                //set position
-                                Clone.transform.parent = GameObject.FindWithTag("worldRoot").transform;
-
-                                var scriptReference = Clone.GetComponent<ObjectPlacement>();
-                                if (scriptReference != null)
+                                Clone = Instantiate(dynamicText, transform.position, Quaternion.identity) as GameObject;
+                                if (Clone != null)
                                 {
-                                    scriptReference.SetLonLat(path.Value["lon"], path.Value["lat"]);
-
-                                    //for debug
-                                    Global.objectNames.Add(model);
-                                    Global.objectDistance.Add(0);
-                                    Global.objectAlpha.Add(0);
-                                    scriptReference.SetID(i);
-                                    i++;
-
-                                }
-
-                                //set poi mask
-                                var scriptReferencePOI = Clone.GetComponent<poi>();
-                                if (scriptReferencePOI != null)
-                                {
-                                    scriptReferencePOI.SetUiContainert(GameObject.FindWithTag("mask"));
+                                    TextMesh t = (TextMesh)Clone.GetComponent(typeof(TextMesh));
+                                    t.text = "testing 123";//set position
                                 }
 
 
+                                // 3 = growUp
+                                if (model == "growup.png")
+                                {
+                                    Clone = Instantiate(growUp, transform.position, Quaternion.identity) as GameObject;
+                                }
+                                else
+
+                                // 4 = mdhm
+                                if (model == "murder.png")
+                                {
+                                    Clone = Instantiate(mdhm, transform.position, Quaternion.identity) as GameObject;
+                                }
+                                else
+
+                                // 5 = hyestd
+                                if (model == "dead.png")
+                                {
+                                    Clone = Instantiate(hyestd, transform.position, Quaternion.identity) as GameObject;
+                                }
+                                else
+
+                                // 6 = clayCellFracture
+                                if (model == "clay.png")
+                                {
+                                    Clone = Instantiate(clayCellFracture, transform.position, Quaternion.identity) as GameObject;
+                                }
+
+                                // 7 = worldMusic
+                                if (model == "world.png")
+                                {
+                                    Clone = Instantiate(worldMusic, transform.position, Quaternion.identity) as GameObject;
+                                }
+                                else
+
+                                // 8 = clayCellFracture
+                                if (model == "beautiful.png")
+                                {
+                                    Clone = Instantiate(BBeautiful, transform.position, Quaternion.identity) as GameObject;
+                                }
+
+                                // 9 = raft
+                                if (model == "raft.png")
+                                {
+                                    Clone = Instantiate(raft, transform.position, Quaternion.identity) as GameObject;
+                                }
+
+
+                                if (Clone != null)
+                                {
+                                    //set position
+                                    Clone.transform.parent = GameObject.FindWithTag("worldRoot").transform;
+
+                                    var scriptReference = Clone.GetComponent<ObjectPlacement>();
+                                    if (scriptReference != null)
+                                    {
+                                        scriptReference.SetLonLat(path.Value["lon"], path.Value["lat"]);
+
+                                        //for debug
+                                        Global.objectNames.Add(model);
+                                        Global.objectDistance.Add(0);
+                                        Global.objectAlpha.Add(0);
+                                        scriptReference.SetID(i);
+                                        i++;
+
+                                    }
+
+                                    //set poi mask
+                                    var scriptReferencePOI = Clone.GetComponent<poi>();
+                                    if (scriptReferencePOI != null)
+                                    {
+                                        scriptReferencePOI.SetUiContainert(GameObject.FindWithTag("mask"));
+                                    }
+
+
+                                    //set action
+                                    var action = path.Value["action"].ToString();
+                                    action = action.Substring(1, action.Length - 2);
+                                    if (action == "darkness")
+                                    {
+                                        //saturation
+                                        var scriptReferenceSaturation = Clone.GetComponent<mdhmSaturation>();
+                                        if (scriptReferenceSaturation != null)
+                                        {
+                                            //set variables
+                                            //scriptReferenceSaturation.SetUiContainert(GameObject.FindWithTag("mask"));
+                                        }
+                                    }
+
+                                    if (action == "jump")
+                                    {
+                                        //jump
+                                        var scriptReferenceJump = Clone.GetComponent<jumpScale>();
+                                        if (scriptReferenceJump != null)
+                                        {
+                                            //set variables
+                                            //scriptReferenceSaturation.SetUiContainert(GameObject.FindWithTag("mask"));
+                                        }
+                                    }
+
+                                }
+
+                                debugText.text = debugText.text + Environment.NewLine + path.Value["model"] + "\t" + path.Value["action"];
                             }
-
-                            debugText.text = debugText.text + Environment.NewLine + path.Value["model"] +"\t"+ path.Value["action"];
-
                         }
                     }
                 }

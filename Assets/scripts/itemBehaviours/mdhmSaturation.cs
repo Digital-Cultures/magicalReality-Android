@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class mdhmSaturation : MonoBehaviour {
 	public Material saturationMaterial;
-	public float bwDistance;
-	public float colorDistance;
+	public float bwDistance = 4;
+	public float colorDistance = 10;
 	private Camera mainCam;
 	private float gradient;
 	private float displace;

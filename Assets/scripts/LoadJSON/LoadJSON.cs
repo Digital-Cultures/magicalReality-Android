@@ -10,6 +10,7 @@ using SimpleJSON;
 
 using ImaginationOverflow.UniversalDeepLinking;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class LoadJSON : MonoBehaviour
 {
@@ -21,21 +22,26 @@ public class LoadJSON : MonoBehaviour
     private IEnumerator coroutine;
 
     public Text debugText;
+    public Text walkName;
 
     [Tooltip("populate with user routes")]
     public Dropdown dropdown;
 
     private void Awake()
     {
+        Debug.Log("AWAKE");
         dropdown.GetComponent<Dropdown>();
         dropdown.onValueChanged.AddListener(new UnityEngine.Events.UnityAction<int>(index =>
         {
             Global.chosenRoute = dropdown.options[dropdown.value].text;
+            walkName.text = dropdown.options[dropdown.value].text;
         }));
+
     }
 
     void Start()
     {
+        Debug.Log("START");
         DeepLinkManager.Instance.LinkActivated += Instance_LinkActivated;
 
         // WWW readingsite = new WWW(OriginalJsonSite + userid + ".json");
@@ -75,6 +81,34 @@ public class LoadJSON : MonoBehaviour
         //Debug.Log(jsonNode["country"]);
     }
 
+    void OnEnable()
+    {
+        //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    void OnDisable()
+    {
+        //Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. Remember to always have an unsubscription for every delegate you subscribe to!
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "mainMenu" && Global.userid != "")
+        {
+            coroutine = GetRequest(OriginalJsonSite);
+            //coroutine = GetRequest(OriginalJsonSite + userid + ".json");
+            StartCoroutine(coroutine);
+            //dropdown.value = Global.walkid - 1;
+            //Global.chosenRoute = dropdown.options[dropdown.value].text;
+        }
+        Debug.Log("Level Loaded = "+ scene.name);
+        Debug.Log("Global.useridd = " + Global.userid);
+        Debug.Log("Global.walkid = " + Global.walkid);
+
+    }
+
     private void Instance_LinkActivated(LinkActivation linkActivation)
     {
         //
@@ -83,7 +117,7 @@ public class LoadJSON : MonoBehaviour
         var uri = linkActivation.Uri;
         var querystring = linkActivation.RawQueryString;
         Global.userid = linkActivation.QueryString["user"];
-        Global.walkid = linkActivation.QueryString["walkid"];
+        Global.walkid = int.Parse(linkActivation.QueryString["walkid"]);
 
         //TODO: if walkid==null show dropdown
 
@@ -96,10 +130,12 @@ public class LoadJSON : MonoBehaviour
         {
             SceneManager.LoadScene("mainMenu");
         }
-
-        coroutine = GetRequest(OriginalJsonSite);
-        //coroutine = GetRequest(OriginalJsonSite + userid + ".json");
-        StartCoroutine(coroutine);
+        else
+        {
+            coroutine = GetRequest(OriginalJsonSite);
+            //coroutine = GetRequest(OriginalJsonSite + userid + ".json");
+            StartCoroutine(coroutine);
+        }
     }
 
     IEnumerator GetRequest(string uri)
@@ -146,6 +182,7 @@ public class LoadJSON : MonoBehaviour
                     var route = new Dropdown.OptionData(routesJSON.Value["routeName"].ToString().ToUpper());
                     routes.Add(route);
 
+                    // this sets the defalt to the last route
                     if (Global.chosenRoute == "")
                     {
                         Global.chosenRoute = routesJSON.Value["routeName"].ToString().ToUpper();
@@ -155,5 +192,9 @@ public class LoadJSON : MonoBehaviour
         }
 
         dropdown.AddOptions(routes);
+        dropdown.value = Global.walkid - 1;
+        Global.chosenRoute = dropdown.options[dropdown.value].text;
+        var walkNameText = dropdown.options[dropdown.value].text;
+        walkName.text = walkNameText.Substring(1, walkNameText.Length - 2) + Environment.NewLine + "by" + Environment.NewLine + Global.userid;
     }
 }

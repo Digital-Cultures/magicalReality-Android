@@ -38,7 +38,7 @@ public class ObjectPlacement : MonoBehaviour {
 		lonLat=new dLocation(longitude,latitude);
 
         //
-        DeepLinkManager.Instance.LinkActivated += Instance_LinkActivated;
+        //DeepLinkManager.Instance.LinkActivated += Instance_LinkActivated;
         Debug.Log("------------------Start Object Placment ");
     }
 	
@@ -54,24 +54,24 @@ public class ObjectPlacement : MonoBehaviour {
     }
 
 
-    private void Instance_LinkActivated(LinkActivation linkActivation)
-    {
-        //
-        //  my activation code
-        //
-        var uri = linkActivation.Uri;
-        var querystring = linkActivation.RawQueryString;
-        Global.userid = linkActivation.QueryString["user"];
-        Global.walkid = linkActivation.QueryString["walkid"];
+    //private void Instance_LinkActivated(LinkActivation linkActivation)
+    //{
+    //    //
+    //    //  my activation code
+    //    //
+    //    var uri = linkActivation.Uri;
+    //    var querystring = linkActivation.RawQueryString;
+    //    Global.userid = linkActivation.QueryString["user"];
+    //    Global.walkid = linkActivation.QueryString["walkid"];
 
 
-        Debug.Log("TRY TO LOAD FROM LINK ON MAIN PAGE!");
+    //    Debug.Log("TRY TO LOAD FROM LINK ON MAIN PAGE!");
 
-      //  coroutine = GetRequest(OriginalJsonSite);
-        //coroutine = GetRequest(OriginalJsonSite + userid + ".json");
-       // StartCoroutine(coroutine);
+    //  //  coroutine = GetRequest(OriginalJsonSite);
+    //    //coroutine = GetRequest(OriginalJsonSite + userid + ".json");
+    //   // StartCoroutine(coroutine);
 
-    }
+    //}
 
     // Update is called once per frame
     void Update () {
