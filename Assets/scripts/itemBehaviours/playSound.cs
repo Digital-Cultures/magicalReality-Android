@@ -19,21 +19,16 @@ public class playSound : MonoBehaviour {
 		
 	}
    private void OnTriggerEnter(Collider other){
-   	if(!Global.bearingSet){
-   		return;
-   	}
-   	if(other.gameObject.CompareTag("Player")){
-    	if(source!=null && !source.isPlaying){
-    		source.Play();
-			archiveViewer.setText(itemDescription);
-			archiveViewer.setSprite(archiveItem);
-			Handheld.Vibrate();
-    	}
+       	if(!Global.bearingSet){
+       		return;
+       	}
+       	if(other.gameObject.CompareTag("Player")){
+        	if(source!=null && !source.isPlaying){
+        		source.Play();
+    			archiveViewer.setText(itemDescription);
+    			archiveViewer.setSprite(archiveItem);
+    			Handheld.Vibrate();
+        	}
+        }
     }
-
-    }
-
-
-
-
 }

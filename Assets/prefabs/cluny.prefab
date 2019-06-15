@@ -213,6 +213,8 @@ MonoBehaviour:
     type: 3}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 60
   solidDistance: 5
@@ -230,11 +232,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   latitude: 54.97524
   longitude: -1.591671
+  id: 0
   transparentDistance: 50
   solidDistance: 3
   faceCamera: 1
   useGlobalDistance: 1
   positionSet: 0
+  debugText: {fileID: 0}
 --- !u!1 &269513357193070616
 GameObject:
   m_ObjectHideFlags: 0

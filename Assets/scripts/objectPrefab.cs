@@ -77,126 +77,107 @@ public class objectPrefab : MonoBehaviour
                             model = model.Substring(1, model.Length - 2);
 
                             Debug.Log(path.Value["model"] + "  model:" + model);
-
-                            // 1 = cluny
-                            if (model == "cluny.png")
+                            switch (model)
                             {
-                                Debug.Log("cluny!!!!!!!!!!!");
-                                Clone = Instantiate(cluny, transform.position, Quaternion.identity) as GameObject;
-                            }
-                            else
-
-                            // 2 = cagedBird
-                            if (model == "bird.png")
-                            {
-                                Clone = Instantiate(dynamicText, transform.position, Quaternion.identity) as GameObject;
-                                if (Clone != null)
-                                {
-                                    TextMesh t = (TextMesh)Clone.GetComponent(typeof(TextMesh));
-                                    t.text = "testing 123";//set position
-                                }
-
-
-                                // 3 = growUp
-                                if (model == "growup.png")
-                                {
+                                case "cluny.png":
+                                    Debug.Log("cluny!!!!!!!!!!!");
+                                    Clone = Instantiate(cluny, transform.position, Quaternion.identity) as GameObject;
+                                    break;
+                                case "bird.png":
+                                    Clone = Instantiate(cagedBird, transform.position, Quaternion.identity) as GameObject;
+                                    break;
+                                case "growup.png":
                                     Clone = Instantiate(growUp, transform.position, Quaternion.identity) as GameObject;
-                                }
-                                else
-
-                                // 4 = mdhm
-                                if (model == "murder.png")
-                                {
+                                    break;
+                                case "murder.png":
                                     Clone = Instantiate(mdhm, transform.position, Quaternion.identity) as GameObject;
-                                }
-                                else
-
-                                // 5 = hyestd
-                                if (model == "dead.png")
-                                {
+                                    break;
+                                case "dead.png":
                                     Clone = Instantiate(hyestd, transform.position, Quaternion.identity) as GameObject;
-                                }
-                                else
-
-                                // 6 = clayCellFracture
-                                if (model == "clay.png")
-                                {
+                                    break;
+                                case "clay.png":
                                     Clone = Instantiate(clayCellFracture, transform.position, Quaternion.identity) as GameObject;
-                                }
-
-                                // 7 = worldMusic
-                                if (model == "world.png")
-                                {
+                                    break;
+                                case "world.png":
                                     Clone = Instantiate(worldMusic, transform.position, Quaternion.identity) as GameObject;
-                                }
-                                else
-
-                                // 8 = clayCellFracture
-                                if (model == "beautiful.png")
-                                {
+                                    break;
+                                case "beautiful.png":
                                     Clone = Instantiate(BBeautiful, transform.position, Quaternion.identity) as GameObject;
-                                }
-
-                                // 9 = raft
-                                if (model == "raft.png")
-                                {
+                                    break;
+                                case "raft.png":
                                     Clone = Instantiate(raft, transform.position, Quaternion.identity) as GameObject;
+                                    break;
+                            }
+
+
+                            //text
+                            Debug.Log(model.Substring(5));
+
+                            if (model.Substring(0, 5) == "text:")
+                            {
+                                var text3D = model.Substring(5);
+                                Debug.Log(text3D.Substring(0, text3D.Length-4));
+                                //Clone = Instantiate(raft, transform.position, Quaternion.identity) as GameObject;
+                            }
+
+
+
+                            //// ADD VARABLES TO SCRIPT
+
+                            if (Clone != null){
+                                //set position
+                                Clone.transform.parent = GameObject.FindWithTag("worldRoot").transform;
+
+                                var scriptReference = Clone.GetComponent<ObjectPlacement>();
+                                if (scriptReference != null)
+                                {
+                                    scriptReference.SetLonLat(path.Value["lon"], path.Value["lat"]);
+                                    scriptReference.SetID(i);
+
+                                    //for debug
+                                    Global.objectNames.Add(model);
+                                    Global.objectDistance.Add(0);
+
+                                    i++;
                                 }
 
 
-                                if (Clone != null)
+                                var scriptReferencePOI = Clone.GetComponent<poi>();
+                                if (scriptReferencePOI != null)
                                 {
-                                    //set position
-                                    Clone.transform.parent = GameObject.FindWithTag("worldRoot").transform;
-
-                                    var scriptReference = Clone.GetComponent<ObjectPlacement>();
-                                    if (scriptReference != null)
-                                    {
-                                        scriptReference.SetLonLat(path.Value["lon"], path.Value["lat"]);
-
-                                        //for debug
-                                        Global.objectNames.Add(model);
-                                        Global.objectDistance.Add(0);
-                                        Global.objectAlpha.Add(0);
-                                        scriptReference.SetID(i);
-                                        i++;
-
-                                    }
-
-                                    //set poi mask
-                                    var scriptReferencePOI = Clone.GetComponent<poi>();
-                                    if (scriptReferencePOI != null)
-                                    {
-                                        scriptReferencePOI.SetUiContainert(GameObject.FindWithTag("mask"));
-                                    }
-
-
                                     //set action
                                     var action = path.Value["action"].ToString();
+                                    Global.objectAlpha.Add(action);
                                     action = action.Substring(1, action.Length - 2);
-                                    if (action == "darkness")
+                                    switch (action)
                                     {
-                                        //saturation
-                                        var scriptReferenceSaturation = Clone.GetComponent<mdhmSaturation>();
-                                        if (scriptReferenceSaturation != null)
-                                        {
-                                            //set variables
-                                            //scriptReferenceSaturation.SetUiContainert(GameObject.FindWithTag("mask"));
-                                        }
+                                        case "smoke":
+                                            Debug.Log("SET VIGNETTE");
+                                            scriptReferencePOI.setEffect(Global.Effect.Vignette);
+                                            break;
+                                        case "darkness":
+                                            scriptReferencePOI.setEffect(Global.Effect.BandW);
+                                            break;
+                                        case "crumble":
+                                            scriptReferencePOI.setEffect(Global.Effect.Red);
+                                            break;
+                                        case "rotate":
+                                            scriptReferencePOI.setEffect(Global.Effect.Blue);
+                                            break;
+                                        case "shards":
+                                            scriptReferencePOI.setEffect(Global.Effect.Green);
+                                            break;
+                                        case "choose an interaction for your object":
+                                            scriptReferencePOI.setEffect(Global.Effect.Hue);
+                                            break;
                                     }
 
-                                    if (action == "jump")
-                                    {
-                                        //jump
-                                        var scriptReferenceJump = Clone.GetComponent<jumpScale>();
-                                        if (scriptReferenceJump != null)
-                                        {
-                                            //set variables
-                                            //scriptReferenceSaturation.SetUiContainert(GameObject.FindWithTag("mask"));
-                                        }
-                                    }
+                                    //set Compass
+                                    scriptReferencePOI.SetUiContainert(GameObject.FindWithTag("mask"));
 
+                                    scriptReferencePOI.SetID(i);
                                 }
+
 
                                 debugText.text = debugText.text + Environment.NewLine + path.Value["model"] + "\t" + path.Value["action"];
                             }

@@ -59,7 +59,7 @@ namespace AccuraGPS
             }
         }
         private float coordsDif2=10000.0f; //Used to assess gps accuracy
-        private double minLon= -10.00;
+        private double minLon= -100.00;
         private double minLat= -80.00;
         private double maxLon= 100.00;
         private double maxLat= 80.00;

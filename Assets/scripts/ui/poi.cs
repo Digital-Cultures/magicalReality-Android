@@ -7,7 +7,10 @@ public class poi : MonoBehaviour {
 	public GameObject uiContainer;
 	public GameObject marker;
 	public Sprite visitedIcon;
-	public float compassWidth = 975; 
+    public Global.Effect effect = Global.Effect.None;
+    public int id;
+
+    public float compassWidth = 975; 
 	private GameObject markerGO;
 	private Vector3 startPosition;
 	private Camera cam;
@@ -16,8 +19,10 @@ public class poi : MonoBehaviour {
 	private float playerDistance=100;
 	private bool visited=false;
 
-	// Use this for initialization
-	void Start () {
+    private float alpha = 0f;
+
+    // Use this for initialization
+    void Start () {
         Debug.Log("------------------Start POI ");
         cam =Camera.main;
 		markerGO = Instantiate(marker) as GameObject;
@@ -31,6 +36,16 @@ public class poi : MonoBehaviour {
     {
         uiContainer = uiContainerMask;
 
+    }
+
+    public void setEffect(Global.Effect chossenEffect)
+    {
+        effect = chossenEffect;
+    }
+
+    public void SetID(int ID)
+    {
+        id = ID;
     }
 
     // Update is called once per frame
@@ -51,7 +66,8 @@ public class poi : MonoBehaviour {
 						visited=true;
 						Image img=markerGO.GetComponent<Image>();
 						img.sprite=visitedIcon;
-					}
+
+                    }
 				}
 				setOpacity();
                 //Debug.Log("------------------DISTANCE 1: " + playerDistance +"  "+ transform.name);
@@ -73,6 +89,27 @@ public class poi : MonoBehaviour {
 		}else{
 			playerDistance=distanceFromPlayer();
             //Debug.Log("------------------DISTANCE 3: " + playerDistance + "  " + transform.name);
+        }
+
+
+        if (Time.frameCount % 30 == 0)
+        {
+            Debug.Log("--------ObjectPlacement----------: " + Global.originSet + "  ID:" + name + gameObject.GetInstanceID() + "  " + playerDistance + "  " + transparentDistance + "  " + solidDistance + "  " + alpha + "  " + id);
+        }
+
+
+        if (playerDistance < 2){
+            if (Global.EffectsApllied.ContainsKey(name + gameObject.GetInstanceID())){
+                Global.EffectsApllied[name + gameObject.GetInstanceID()] = effect;
+            }else{
+                Global.EffectsApllied.Add(name + gameObject.GetInstanceID(), effect);
+            }
+        }else{
+             if (Global.EffectsApllied.ContainsKey(name + gameObject.GetInstanceID())){
+                Global.EffectsApllied[name + gameObject.GetInstanceID()] = Global.Effect.None;
+            }else{
+                Global.EffectsApllied.Add(name + gameObject.GetInstanceID(), Global.Effect.None);
+            }
         }
 
     }
@@ -100,11 +137,11 @@ public class poi : MonoBehaviour {
 		float distance = Conversions.xzDistance(playerPos,transform.position);
 		// Mathf.Sqrt(Mathf.Pow(playerPos.x-transform.position.x, 2)
 		//		+Mathf.Pow(playerPos.z-transform.position.z, 2));
-		if(Global.playerDistance.ContainsKey(name)){
-			Global.playerDistance[name]=distance;
+		if(Global.playerDistance.ContainsKey(name + gameObject.GetInstanceID())){
+			Global.playerDistance[name + gameObject.GetInstanceID()] =distance;
 		}
 		else{
-			Global.playerDistance.Add(name,distance);
+			Global.playerDistance.Add(name + gameObject.GetInstanceID(), distance);
 		}
 		return distance;
 	}
@@ -113,7 +150,7 @@ public class poi : MonoBehaviour {
 		Image markerImg=markerGO.GetComponent<Image>();
 		double gradient=-1.0f/(transparentDistance-solidDistance);
 		double displace=-(gradient*transparentDistance);
-		float alpha=(float)gradient*playerDistance+(float)displace;
+		alpha=(float)gradient*playerDistance+(float)displace;
        // Debug.Log("------------------alpha: " + alpha);
         if (alpha<0){
     		alpha=1.0f;
@@ -128,4 +165,26 @@ public class poi : MonoBehaviour {
 	public void destroyMarker(){
 		Destroy(markerGO);
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("------------------TRY EFFECT : " + effect); 
+
+        if (!Global.bearingSet)
+        {
+            return;
+        }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("------------------EFFECT : " + effect);
+            Global.chosenEffect = effect;
+            //if (!itemViewed)
+            //{
+            //    archiveViewer.setText(itemDescription);
+            //    archiveViewer.setSprite(archiveItem);
+            //    itemViewed = true;
+            //    Handheld.Vibrate();
+            //}
+        }
+    }
 }

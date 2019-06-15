@@ -7,20 +7,23 @@ public class mdhmSaturation : MonoBehaviour {
 	public Material saturationMaterial;
 	public float bwDistance = 4;
 	public float colorDistance = 10;
-	private Camera mainCam;
+    public float effect = 0;
+    private Camera mainCam;
 	private float gradient;
 	private float displace;
 	private Desaturate saturationScript;
-	//public Text infoUI;
+   // private PostProcessLayer postProcessLayer;
+    //public Text infoUI;
 
-	public Sprite archiveItem;
+    public Sprite archiveItem;
 	bool itemViewed=false;
 	public string itemDescription;
 	// Use this for initialization
 	void Start () {
 		mainCam=Camera.main;
 		saturationScript=mainCam.GetComponent<Desaturate>();
-		saturationScript.enabled=false;
+       // colourScript = mainCam.GetComponent<pro>();
+        saturationScript.enabled=false;
 		gradient=-1/(colorDistance-bwDistance);
 		displace=-(gradient*colorDistance);
 		
@@ -53,20 +56,21 @@ public class mdhmSaturation : MonoBehaviour {
 		}else{
 			saturationScript.enabled=false;
 		}
+        Debug.Log("SATURATION: = " + saturation +"  ("+ gradient +" * "+ distance+") + "+displace);
 		saturationMaterial.SetFloat("_Desaturation",saturation);
 	}
 
 	float distanceFromPlayer(){
 		float distance;
 		Vector3 playerPos=mainCam.transform.position;
-		if(Global.playerDistance.TryGetValue(name, out distance)){
+		if(Global.playerDistance.TryGetValue(name+gameObject.GetInstanceID(), out distance)){
 			return distance;
 		}
 		else{
 			distance = Conversions.xzDistance(playerPos,transform.position);
 			// Mathf.Sqrt(Mathf.Pow(playerPos.x-transform.position.x, 2)
 			// 	+Mathf.Pow(playerPos.z-transform.position.z, 2));
-			Global.playerDistance.Add(name,distance);
+			Global.playerDistance.Add(name + gameObject.GetInstanceID(), distance);
 		}
 		return distance;
 	}

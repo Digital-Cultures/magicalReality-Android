@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,8 +38,16 @@ public static class Global{
     public static string chosenRoute = "";
     public static string userid = "";
     public static int walkid = 0;
+
+    //debud text
     public static List<string> objectNames = new List<string>();
     public static List<float> objectDistance = new List<float>();
-    public static List<float> objectAlpha = new List<float>();
+    public static List<string> objectAlpha = new List<string>();
     public static string debug = "";
+
+    //effects
+    public enum Effect { None, Red, Green, Blue, BandW, Vignette, Hue };
+    public static Effect chosenEffect = Effect.None;
+    public static Dictionary<string, Effect> EffectsApllied = new Dictionary<string, Effect>();
+
 }

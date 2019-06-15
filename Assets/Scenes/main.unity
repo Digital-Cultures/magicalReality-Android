@@ -1696,7 +1696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &299058988
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3558,6 +3558,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 60
   solidDistance: 5
@@ -4994,6 +4996,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 0}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 2
   solidDistance: 1
@@ -5059,6 +5063,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 0}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 2
   solidDistance: 1
@@ -5553,6 +5559,7 @@ MonoBehaviour:
   saturationMaterial: {fileID: 2100000, guid: b5f2ab2dbd1774e2098ae38c82810dbe, type: 2}
   bwDistance: 4
   colorDistance: 30
+  effect: 0
   archiveItem: {fileID: 21300000, guid: 1a72611f1ab184bf9b6fdce08bb3be4f, type: 3}
   itemDescription: Plot summary from "A Song for Ella Grey"
 --- !u!114 &1094490351
@@ -5570,6 +5577,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 145
   solidDistance: 5
@@ -7439,6 +7448,15 @@ PrefabInstance:
       propertyPath: m_RenderingPath
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 20155940112608238, guid: c10877f7cd5764de18d46d7b777d1faa,
+        type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1637996540812124, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
 --- !u!1 &1426106159
@@ -7903,6 +7921,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 0}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 2
   solidDistance: 1
@@ -8112,13 +8132,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550360847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bb62b035e68e4f2db129a286f251e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: b5f2ab2dbd1774e2098ae38c82810dbe, type: 2}
---- !u!114 &1550360850
+--- !u!114 &1550360849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8127,10 +8147,87 @@ MonoBehaviour:
   m_GameObject: {fileID: 1550360847}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: dca260af26351414f8e9a227ef17d40f, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!114 &1550360850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550360847}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: f5c6fe4367db1469fb3e9710e95e8703, type: 2}
+--- !u!114 &1550360851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550360847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 845719445}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 258
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 1
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!81 &1550360852
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8139,6 +8236,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550360847}
   m_Enabled: 1
+--- !u!114 &1550360855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550360847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a576fcab92f491e98c635cc3219efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1557897133
 GameObject:
   m_ObjectHideFlags: 0
@@ -8612,7 +8721,7 @@ GameObject:
   - component: {fileID: 1638616632}
   - component: {fileID: 1638616634}
   - component: {fileID: 1638616633}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -8786,6 +8895,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 110
   solidDistance: 5
@@ -8884,6 +8995,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 95
   solidDistance: 5
@@ -8897,6 +9010,10 @@ PrefabInstance:
     - target: {fileID: 451345741, guid: e8e425e846dc9481094f3e2d8555d72a, type: 3}
       propertyPath: m_Name
       value: BBeautiful
+      objectReference: {fileID: 0}
+    - target: {fileID: 451345741, guid: e8e425e846dc9481094f3e2d8555d72a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 451345742, guid: e8e425e846dc9481094f3e2d8555d72a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8987,6 +9104,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 80
   solidDistance: 5
@@ -10071,6 +10190,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 100
   solidDistance: 5
@@ -15240,7 +15361,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 2095, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2090732218
@@ -15503,6 +15624,8 @@ MonoBehaviour:
   uiContainer: {fileID: 1713201447}
   marker: {fileID: 1386342466217216, guid: 911d883cd061a4ffc9d956489ad2736f, type: 3}
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
+  effect: 0
+  id: 0
   compassWidth: 975
   transparentDistance: 85
   solidDistance: 5

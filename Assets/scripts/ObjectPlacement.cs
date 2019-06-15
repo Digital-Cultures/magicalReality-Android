@@ -18,6 +18,7 @@ public class ObjectPlacement : MonoBehaviour {
 	public float solidDistance = 10;
 	public bool faceCamera=true;
 	public bool useGlobalDistance=true;
+
 	private Vector3 worldPos;
 	public bool positionSet=false;
 	private float minDistance=9999999.0f;
@@ -53,7 +54,6 @@ public class ObjectPlacement : MonoBehaviour {
         id = ID;
     }
 
-
     //private void Instance_LinkActivated(LinkActivation linkActivation)
     //{
     //    //
@@ -76,11 +76,6 @@ public class ObjectPlacement : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        //Debug.Log("--------ObjectPlacement----------: " + Global.originSet  +"  "+ transform.name + "  " + playerDistance + "  " + transparentDistance + "  " + solidDistance + "  " + alpha);
-
-        Global.objectDistance[id] = playerDistance;
-        Global.objectAlpha[id] = alpha;
-
         if (Global.originSet){ //&& Global.bearingSet
 			//Init
 			if(!positionSet){
@@ -95,13 +90,13 @@ public class ObjectPlacement : MonoBehaviour {
 					return;
 				}
 				setVisible(visible);
-				playerDistance=distanceFromPlayer();
+				playerDistance = distanceFromPlayer();
 
 				//Set Opacity
 				setOpacity();
 
-				//Recalculate position from player
-				/*
+                //Recalculate position from player
+                /*
 				if(playerDistance<recalculateDistance && recalcualtePos){
 					Vector3 xyzDistance=Conversions.lonLatToXZ(Global.dPlayerLatLon,lonLat);
 					//Vector3 localPlayer=Conversions.lonLatToXZ(Global.dOrigin,Global.dPlayerLatLon);
@@ -115,8 +110,8 @@ public class ObjectPlacement : MonoBehaviour {
 				// }
 				*/
 
-				//Make the model face the player (only happens when approached for the first time)
-				if(faceCamera){
+                //Make the model face the player (only happens when approached for the first time)
+                if (faceCamera){
 					if(playerDistance<transparentDistance+2){
 						Vector3 target = new Vector3(mainCam.transform.position.x,transform.position.y,mainCam.transform.position.z);
 						transform.LookAt(target);
@@ -132,27 +127,31 @@ public class ObjectPlacement : MonoBehaviour {
 
             }
 
-		}
+            //if (Time.frameCount % 30 == 0)
+            //{
+            //    Debug.Log("--------ObjectPlacement----------: " + Global.originSet + "  " + transform.name + "  ID:" + name + gameObject.GetInstanceID()+"  "+playerDistance + "  " + transparentDistance + "  " + solidDistance + "  " + alpha + "  " + id);
+            //}
 
-		
+            Global.objectDistance[id] = playerDistance;
+            //Global.objectAlpha[id] = alpha;
+
+        }
 	}
 
 	float distanceFromPlayer(){
 		float distance;
 		Vector3 playerPos=mainCam.transform.position;
 		if(useGlobalDistance){
-			if(Global.playerDistance.TryGetValue(name, out distance)){
+			if(Global.playerDistance.TryGetValue(name + gameObject.GetInstanceID(), out distance)){
 				return distance;
 			}
 			else{
-				distance = Mathf.Sqrt(Mathf.Pow(playerPos.x-transform.position.x, 2)
-					+Mathf.Pow(playerPos.z-transform.position.z, 2));
-				Global.playerDistance.Add(name,distance);
+				distance = Mathf.Sqrt(Mathf.Pow(playerPos.x-transform.position.x, 2)+Mathf.Pow(playerPos.z-transform.position.z, 2));
+				Global.playerDistance.Add(name + gameObject.GetInstanceID(), distance);
 			}
 		}
 		else{
-			distance = Mathf.Sqrt(Mathf.Pow(playerPos.x-transform.position.x, 2)
-					+Mathf.Pow(playerPos.z-transform.position.z, 2));
+			distance = Mathf.Sqrt(Mathf.Pow(playerPos.x-transform.position.x, 2)+Mathf.Pow(playerPos.z-transform.position.z, 2));
 		}
 		return distance;
 	}
