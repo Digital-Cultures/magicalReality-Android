@@ -3559,6 +3559,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 60
   solidDistance: 5
@@ -4997,6 +4998,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 0}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 2
   solidDistance: 1
@@ -5064,6 +5066,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 0}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 2
   solidDistance: 1
@@ -5272,7 +5275,8 @@ MonoBehaviour:
   worldMusic: {fileID: 1802337190, guid: 9ffe084c402e84bd3945d90735d07cf3, type: 3}
   BBeautiful: {fileID: 451345741, guid: e8e425e846dc9481094f3e2d8555d72a, type: 3}
   raft: {fileID: 5447928874100745235, guid: 0d40090faa7c8487eb511c4101dcf98a, type: 3}
-  dynamicText: {fileID: 7670622193237224276}
+  dynamicText: {fileID: 7670622193237224276, guid: df3280a9f3cd54466a64af37f6c212b3,
+    type: 3}
   debugText: {fileID: 451345743}
 --- !u!1 &973872298
 GameObject:
@@ -5578,6 +5582,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 145
   solidDistance: 5
@@ -7921,6 +7926,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 0}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 2
   solidDistance: 1
@@ -8895,6 +8901,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 110
   solidDistance: 5
@@ -8993,6 +9000,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 95
   solidDistance: 5
@@ -9102,6 +9110,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 80
   solidDistance: 5
@@ -10186,6 +10195,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 100
   solidDistance: 5
@@ -15620,6 +15630,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 85
   solidDistance: 5
@@ -16652,9 +16663,3 @@ PrefabInstance:
       objectReference: {fileID: 1713201447}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 150729c791a6e48e1ae0d9cd99b5a502, type: 3}
---- !u!1 &7670622193237224276 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7670622193237224276, guid: df3280a9f3cd54466a64af37f6c212b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1328612045840507134}
-  m_PrefabAsset: {fileID: 0}

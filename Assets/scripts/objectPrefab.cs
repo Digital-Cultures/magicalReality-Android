@@ -109,8 +109,21 @@ public class objectPrefab : MonoBehaviour
                                     break;
                             }
 
+                            if (model.Substring(0, 5) == "text:")
+                            {
+                                Clone = Instantiate(dynamicText, transform.position, Quaternion.identity) as GameObject;
 
-                           
+                                var text3D = model.Substring(5);
+                                Debug.Log(text3D.Substring(0, text3D.Length - 4));
+
+                                if (Clone != null)
+                                {
+                                    TextMesh textObject = Clone.GetComponent<TextMesh>();
+                                    textObject.text = text3D.Substring(0, text3D.Length - 4);
+                                }
+                            }
+
+
 
 
 

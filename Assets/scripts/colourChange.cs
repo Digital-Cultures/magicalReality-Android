@@ -50,20 +50,20 @@ public class colourChange : MonoBehaviour
             if (effect.Value == Global.Effect.Vignette)
             {
                 Debug.Log("UPDATE COLOUR Vignette "+ Mathf.Sin(Time.realtimeSinceStartup));
-                m_Vignette.intensity.value = Mathf.Sin(Time.realtimeSinceStartup);
+                m_Vignette.intensity.value = (Mathf.Sin(Time.realtimeSinceStartup)+1)/2;
 
                 break;
             }
 
             else if(effect.Value == Global.Effect.Blue)
             {
-                Debug.Log("UPDATE COLOUR Blue "+ (Mathf.Sin(Time.realtimeSinceStartup) * 100) + 100f);
+                Debug.Log("UPDATE COLOUR Blue "+ ((Mathf.Sin(Time.realtimeSinceStartup) * 50) + 50f));
 
-                m_colour.mixerBlueOutBlueIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * 100) + 100f;
+                m_colour.mixerBlueOutBlueIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * 50) + 50f;
 
-                m_colour.mixerRedOutRedIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -100) + 100f;
+                m_colour.mixerRedOutRedIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -50) + 50f;
 
-                m_colour.mixerGreenOutGreenIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -100) + 100f;
+                m_colour.mixerGreenOutGreenIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -50) + 50f;
 
 
                 break;
@@ -71,13 +71,13 @@ public class colourChange : MonoBehaviour
 
             else if(effect.Value == Global.Effect.Red)
             {
-                Debug.Log("UPDATE COLOUR Red "+ (Mathf.Sin(Time.realtimeSinceStartup) * 100) + 100f);
+                Debug.Log("UPDATE COLOUR Red "+ ((Mathf.Sin(Time.realtimeSinceStartup) * 50) + 50f));
 
-                m_colour.mixerBlueOutBlueIn.value = (Mathf.Sin(Time.realtimeSinceStartup)* -100)+100f;
+                m_colour.mixerBlueOutBlueIn.value = (Mathf.Sin(Time.realtimeSinceStartup)* - 50)+50f;
 
-                m_colour.mixerRedOutRedIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * 100) + 100f;
+                m_colour.mixerRedOutRedIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * 50) + 50f;
 
-                m_colour.mixerGreenOutGreenIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -100) + 100f;
+                m_colour.mixerGreenOutGreenIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -50) + 50f;
 
 
                 break;
@@ -85,13 +85,13 @@ public class colourChange : MonoBehaviour
 
             else if (effect.Value == Global.Effect.Green)
             {
-                Debug.Log("UPDATE COLOUR Red "+ (Mathf.Sin(Time.realtimeSinceStartup) * 100) + 100f);
+                Debug.Log("UPDATE COLOUR GREEN "+ ((Mathf.Sin(Time.realtimeSinceStartup) * 50) + 50f));
 
-                m_colour.mixerBlueOutBlueIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -100) + 100f;
+                m_colour.mixerBlueOutBlueIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -50) + 50f;
 
-                m_colour.mixerRedOutRedIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -100) + 100f;
+                m_colour.mixerRedOutRedIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * -50) + 50f;
   
-                m_colour.mixerGreenOutGreenIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * 100) + 100f;
+                m_colour.mixerGreenOutGreenIn.value = (Mathf.Sin(Time.realtimeSinceStartup) * 50) + 50f;
 
                 break;
             }
