@@ -30,7 +30,7 @@ public class ObjectPlacement : MonoBehaviour {
 	// private float recalculateDistance;
 	bool visible=false;
 
-    public Text debugText;
+    //public Text debugText;
 
     // Use this for initialization
     void Start () {

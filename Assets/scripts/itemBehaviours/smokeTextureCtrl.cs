@@ -31,7 +31,7 @@ public class smokeTextureCtrl : MonoBehaviour {
 		}
 		float distance=distanceFromPlayer();
 		if(distance<=1 && !itemViewed){
-			archiveViewer.setText(itemDescription);
+			//archiveViewer.setText(itemDescription);
 			archiveViewer.setSprite(archiveItem);
 			itemViewed=true;
 		}

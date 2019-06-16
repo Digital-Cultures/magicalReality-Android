@@ -24,10 +24,10 @@ public class playSound : MonoBehaviour {
        	}
        	if(other.gameObject.CompareTag("Player")){
         	if(source!=null && !source.isPlaying){
-        		source.Play();
-    			archiveViewer.setText(itemDescription);
+        		//source.Play();
+    			//archiveViewer.setText(itemDescription);
     			archiveViewer.setSprite(archiveItem);
-    			Handheld.Vibrate();
+    			//Handheld.Vibrate();
         	}
         }
     }

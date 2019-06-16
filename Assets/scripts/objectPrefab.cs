@@ -110,15 +110,7 @@ public class objectPrefab : MonoBehaviour
                             }
 
 
-                            //text
-                            Debug.Log(model.Substring(5));
-
-                            if (model.Substring(0, 5) == "text:")
-                            {
-                                var text3D = model.Substring(5);
-                                Debug.Log(text3D.Substring(0, text3D.Length-4));
-                                //Clone = Instantiate(raft, transform.position, Quaternion.identity) as GameObject;
-                            }
+                           
 
 
 
@@ -153,23 +145,38 @@ public class objectPrefab : MonoBehaviour
                                     {
                                         case "smoke":
                                             Debug.Log("SET VIGNETTE");
-                                            scriptReferencePOI.setEffect(Global.Effect.Vignette);
+                                            scriptReferencePOI.SetEffect(Global.Effect.Vignette);
                                             break;
                                         case "darkness":
-                                            scriptReferencePOI.setEffect(Global.Effect.BandW);
+                                            scriptReferencePOI.SetEffect(Global.Effect.BandW);
                                             break;
                                         case "crumble":
-                                            scriptReferencePOI.setEffect(Global.Effect.Red);
+                                            scriptReferencePOI.SetEffect(Global.Effect.Red);
                                             break;
                                         case "rotate":
-                                            scriptReferencePOI.setEffect(Global.Effect.Blue);
+                                            scriptReferencePOI.SetEffect(Global.Effect.Blue);
                                             break;
                                         case "shards":
-                                            scriptReferencePOI.setEffect(Global.Effect.Green);
+                                            scriptReferencePOI.SetEffect(Global.Effect.Green);
                                             break;
                                         case "choose an interaction for your object":
-                                            scriptReferencePOI.setEffect(Global.Effect.Hue);
+                                            scriptReferencePOI.SetEffect(Global.Effect.Hue);
                                             break;
+                                    }
+
+                                    //text
+                                    Debug.Log(model.Substring(5));
+
+                                    if (model.Substring(0, 5) == "text:")
+                                    {
+                                        var text3D = model.Substring(5);
+                                        Debug.Log(text3D.Substring(0, text3D.Length - 4));
+                                        scriptReferencePOI.SetPopupText(text3D.Substring(0, text3D.Length - 4));
+                                        //Clone = Instantiate(raft, transform.position, Quaternion.identity) as GameObject;
+                                    }
+                                    else
+                                    {
+                                        scriptReferencePOI.SetPopupText("DEFAULT TEST TEXT");
                                     }
 
                                     //set Compass

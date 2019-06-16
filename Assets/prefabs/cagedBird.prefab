@@ -133,7 +133,6 @@ MonoBehaviour:
   faceCamera: 1
   useGlobalDistance: 1
   positionSet: 0
-  debugText: {fileID: 0}
 --- !u!114 &1919608188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +150,7 @@ MonoBehaviour:
   visitedIcon: {fileID: 21300000, guid: 141d870e87d324bbca6926a6f7124382, type: 3}
   effect: 0
   id: 0
+  popupText: 
   compassWidth: 975
   transparentDistance: 80
   solidDistance: 6

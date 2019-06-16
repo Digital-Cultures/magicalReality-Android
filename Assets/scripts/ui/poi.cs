@@ -9,6 +9,7 @@ public class poi : MonoBehaviour {
 	public Sprite visitedIcon;
     public Global.Effect effect = Global.Effect.None;
     public int id;
+    public string popupText = "";
 
     public float compassWidth = 975; 
 	private GameObject markerGO;
@@ -18,6 +19,7 @@ public class poi : MonoBehaviour {
 	public float solidDistance = 5;
 	private float playerDistance=100;
 	private bool visited=false;
+    private bool itemViewed = false;
 
     private float alpha = 0f;
 
@@ -38,7 +40,7 @@ public class poi : MonoBehaviour {
 
     }
 
-    public void setEffect(Global.Effect chossenEffect)
+    public void SetEffect(Global.Effect chossenEffect)
     {
         effect = chossenEffect;
     }
@@ -46,6 +48,10 @@ public class poi : MonoBehaviour {
     public void SetID(int ID)
     {
         id = ID;
+    }
+    public void SetPopupText(string txt)
+    {
+        popupText = txt;
     }
 
     // Update is called once per frame
@@ -98,6 +104,7 @@ public class poi : MonoBehaviour {
         }
 
 
+        //set effect if distance is less tham 2 ( this could go in the collider below)
         if (playerDistance < 2){
             if (Global.EffectsApllied.ContainsKey(name + gameObject.GetInstanceID())){
                 Global.EffectsApllied[name + gameObject.GetInstanceID()] = effect;
@@ -168,7 +175,7 @@ public class poi : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("------------------TRY EFFECT : " + effect); 
+        Debug.Log("------------------TRY EFFECT : " + effect + "   "+ Global.bearingSet +"   "+ other.gameObject.tag + "   " + other.gameObject.name); 
 
         if (!Global.bearingSet)
         {
@@ -178,13 +185,13 @@ public class poi : MonoBehaviour {
         {
             Debug.Log("------------------EFFECT : " + effect);
             Global.chosenEffect = effect;
-            //if (!itemViewed)
-            //{
-            //    archiveViewer.setText(itemDescription);
-            //    archiveViewer.setSprite(archiveItem);
-            //    itemViewed = true;
-            //    Handheld.Vibrate();
-            //}
+            if (!itemViewed)
+            {
+                archiveViewer.setText(popupText);
+                //archiveViewer.setSprite(popupText);
+                itemViewed = true;
+                Handheld.Vibrate();
+            }
         }
     }
 }

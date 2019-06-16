@@ -11,10 +11,10 @@ public class showClayArchive : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(showItem && !itemViewed){
-			archiveViewer.setText(itemDescription);
+			//archiveViewer.setText(itemDescription);
 			archiveViewer.setSprite(archiveItem);
 			itemViewed=true;
-			Handheld.Vibrate();
+			//Handheld.Vibrate();
 		}
 		else{
 			return;

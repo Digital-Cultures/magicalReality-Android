@@ -30,10 +30,10 @@ public class worldMusicInflate : MonoBehaviour {
 			inflation=1-Vector2.Dot(camXZ,modelXZ);
 			if(inflation<0.1 && inflation>-0.1){
 				if(!itemViewed){
-					archiveViewer.setText(itemDescription);
+					//archiveViewer.setText(itemDescription);
 					archiveViewer.setSprite(archiveItem);
 					itemViewed=true;
-					Handheld.Vibrate();
+				    //Handheld.Vibrate();
 				}
 			}
 			//Debug.Log("F  "+transform.up+" C "+mainCam.transform.forward+" I "+inflation);

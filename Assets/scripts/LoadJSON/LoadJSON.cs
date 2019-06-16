@@ -23,6 +23,7 @@ public class LoadJSON : MonoBehaviour
 
     public Text debugText;
     public Text walkName;
+    public GameObject startBtn;
 
     [Tooltip("populate with user routes")]
     public Dropdown dropdown;
@@ -42,6 +43,8 @@ public class LoadJSON : MonoBehaviour
     void Start()
     {
         Debug.Log("START");
+
+        startBtn.SetActive(false);
         DeepLinkManager.Instance.LinkActivated += Instance_LinkActivated;
 
         // WWW readingsite = new WWW(OriginalJsonSite + userid + ".json");
@@ -196,5 +199,8 @@ public class LoadJSON : MonoBehaviour
         Global.chosenRoute = dropdown.options[dropdown.value].text;
         var walkNameText = dropdown.options[dropdown.value].text;
         walkName.text = walkNameText.Substring(1, walkNameText.Length - 2) + Environment.NewLine + "by" + Environment.NewLine + Global.userid;
+
+        startBtn.SetActive(true);
     }
+
 }

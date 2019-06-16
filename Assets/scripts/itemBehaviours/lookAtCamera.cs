@@ -29,10 +29,10 @@ public class lookAtCamera : MonoBehaviour {
 		}
    	if(other.gameObject.CompareTag("Player")){
 	   		if(!itemViewed){
-				archiveViewer.setText(itemDescription);
+				//archiveViewer.setText(itemDescription);
 				archiveViewer.setSprite(archiveItem);
-				itemViewed=true;
-				Handheld.Vibrate();
+				//itemViewed=true;
+				//Handheld.Vibrate();
 			}
     	}
     }

@@ -18,7 +18,7 @@ public class menuActions : MonoBehaviour {
 	}
 
 	public void openLink(){
-		Application.OpenURL("http://digitalcultures.ncl.ac.uk/site/index.html#/grid/369");
+		Application.OpenURL("https://magicalreality.ncl.ac.uk/");
 	}
 
 	IEnumerator asyncLoadScene(){

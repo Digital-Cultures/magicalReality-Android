@@ -40,8 +40,6 @@ public class colourChange : MonoBehaviour
     {
         Reset();
 
-        Debug.Log("UPDATE: "+Global.chosenEffect +" == "+Global.Effect.Vignette);
-
         foreach (KeyValuePair<string, Global.Effect> effect in Global.EffectsApllied)
         {
             //if (effect.Value == Global.Effect.None)
