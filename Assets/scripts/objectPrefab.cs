@@ -196,10 +196,11 @@ public class objectPrefab : MonoBehaviour
                                     scriptReferencePOI.SetUiContainert(GameObject.FindWithTag("mask"));
 
                                     scriptReferencePOI.SetID(i);
+                                    scriptReferencePOI.SetPointID(path.Value["pointId"].ToString());
                                 }
 
 
-                                debugText.text = debugText.text + Environment.NewLine + path.Value["model"] + "\t" + path.Value["action"];
+                                debugText.text = debugText.text + Environment.NewLine + path.Value["model"] + "\t" + path.Value["action"]+"\t"+ path.Value["pointId"];
                             }
                         }
                     }

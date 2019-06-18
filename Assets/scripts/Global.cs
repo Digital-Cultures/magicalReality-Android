@@ -20,7 +20,10 @@ public static class Global{
 	public static int ActiveSet {
 	   get{return activeSet;}
 	   set{activeSet=value;} }
-	public static int activeModel=0;
+
+
+
+    public static int activeModel=0;
 	public static dLocation region1 = new dLocation(-1.592145f,54.97465f);
 	public const int rows=4;
 	public const int cols=6;
@@ -38,6 +41,7 @@ public static class Global{
     public static string chosenRoute = "";
     public static string userid = "";
     public static int walkid = 0;
+    public static string pointID = "";
 
     //debud text
     public static List<string> objectNames = new List<string>();

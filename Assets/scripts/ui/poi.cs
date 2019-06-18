@@ -9,6 +9,7 @@ public class poi : MonoBehaviour {
 	public Sprite visitedIcon;
     public Global.Effect effect = Global.Effect.None;
     public int id;
+    public string pointID = "";
     public string popupText = "";
 
     public float compassWidth = 975; 
@@ -48,6 +49,10 @@ public class poi : MonoBehaviour {
     public void SetID(int ID)
     {
         id = ID;
+    }
+    public void SetPointID(string _pointID)
+    {
+        pointID = _pointID;
     }
     public void SetPopupText(string txt)
     {
@@ -111,6 +116,7 @@ public class poi : MonoBehaviour {
             }else{
                 Global.EffectsApllied.Add(name + gameObject.GetInstanceID(), effect);
             }
+            Global.pointID = pointID;
         }else{
              if (Global.EffectsApllied.ContainsKey(name + gameObject.GetInstanceID())){
                 Global.EffectsApllied[name + gameObject.GetInstanceID()] = Global.Effect.None;

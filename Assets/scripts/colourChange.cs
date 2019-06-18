@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GetSocialSdk.Capture.Scripts;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.Rendering.PostProcessing;
 
 public class colourChange : MonoBehaviour
@@ -8,6 +10,18 @@ public class colourChange : MonoBehaviour
     PostProcessVolume m_Volume;
     Vignette m_Vignette;
     ColorGrading m_colour;
+
+    public GetSocialCapturePreview capturePreview; 
+    public GetSocialCapture capture;
+
+    public GameObject gifPreview;
+    public GameObject recordBtn;
+    public GameObject uploadBtn;
+
+    private static string uploadURL = "https://magicalreality.ncl.ac.uk/php/upload.php";
+
+    private bool startCapture = false;
+    private byte[] myData;
 
     void Start()
     {
@@ -34,6 +48,13 @@ public class colourChange : MonoBehaviour
 
         m_Volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, m_Vignette);
         m_Volume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, m_colour);
+
+
+        //
+        recordBtn.SetActive(false);
+        gifPreview.SetActive(false);
+        uploadBtn.SetActive(false);
+
     }
 
     void Update()
@@ -42,10 +63,14 @@ public class colourChange : MonoBehaviour
 
         foreach (KeyValuePair<string, Global.Effect> effect in Global.EffectsApllied)
         {
-            //if (effect.Value == Global.Effect.None)
-            //{
-            //    
-            //}
+            if (effect.Value != Global.Effect.None)
+            {
+                if (!startCapture)
+                {
+                    recordBtn.SetActive(true);
+                }
+
+            }
 
             if (effect.Value == Global.Effect.Vignette)
             {
@@ -116,6 +141,49 @@ public class colourChange : MonoBehaviour
         }
     }
 
+    public void Capture()
+    {
+        startCapture = true;
+        capture.StartCapture(Global.userid+"_"+ Global.chosenRoute.Substring(1, Global.chosenRoute.Length - 2) + "_"+ Global.pointID);
+        Invoke("ActionFinished", 4);
+        recordBtn.SetActive(false);
+    }
+
+    public void Upload()
+    {
+        Debug.Log("Upload File... Todo:");
+        StartCoroutine(UploadGiftoSeverver());
+        //send source file in url
+        gifPreview.SetActive(false);
+        uploadBtn.SetActive(false);
+    }
+
+    public void Cancel()
+    {
+        gifPreview.SetActive(false);
+        uploadBtn.SetActive(false);
+    }
+
+
+    // stop recording
+    private void ActionFinished()
+    {
+        capture.StopCapture();
+        capture.GenerateCapture(result =>
+        {
+            // use gif, like send it to your friends by using GetSocial Sdk
+            Debug.Log("Should save gif");
+            //upload to somwhere
+        });
+
+        // show preview
+        gifPreview.SetActive(true);
+        uploadBtn.SetActive(true);
+        capturePreview.Play();
+
+        startCapture = false;
+    }
+
     private void Reset()
     {
         m_Vignette.intensity.Override(0f); 
@@ -134,10 +202,33 @@ public class colourChange : MonoBehaviour
 
         m_colour.saturation.Override(100f);
         m_colour.hueShift.Override(0f);
+
+        recordBtn.SetActive(false);
     }
 
     void OnDestroy()
     {
         RuntimeUtilities.DestroyVolume(m_Volume, true, true);
+    }
+
+    IEnumerator UploadGiftoSeverver()
+    {
+        Debug.Log("Upload started : "+ capture.GetFilePath()+"   "+  Application.persistentDataPath);
+
+
+        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+        formData.Add(new MultipartFormFileSection("fileToUpload", System.IO.File.ReadAllBytes(capture.GetFilePath()), capture.GetFileName(), "image/gif"));
+
+        UnityWebRequest www = UnityWebRequest.Post(uploadURL, formData);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!"+www.responseCode+"  "+www.downloadHandler.text);
+        }
     }
 }
